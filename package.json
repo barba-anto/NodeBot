@@ -1,0 +1,21 @@
+{
+  "name": "thebot",
+  "version": "1.0.0",
+  "description": "BarbaH's bot for 1029 TopWar server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.15.0",
+    "@discordjs/rest": "^0.5.0",
+    "axios": "^0.27.2",
+    "discord-api-types": "^0.36.1",
+    "discord.js": "^13.8.1",
+    "googleapis": "^39.2.0",
+    "sequelize": "^6.21.2",
+    "sqlite3": "^5.0.8"
+  }
+}
