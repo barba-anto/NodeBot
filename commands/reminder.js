@@ -21,7 +21,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("reminder")
     .setDescription("Under developement...")
-    // .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
     .setDMPermission(false)
 
     // Add a reminder
