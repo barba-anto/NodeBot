@@ -6,7 +6,6 @@ const DAILY = "daily";
 const WEEKLY = "weekly";
 
 async function manageReminders() {
-  console.log("manageReminders");
   Date.prototype.addDays = function (days) {
     let date = new Date(this.valueOf());
     date.setUTCDate(date.getUTCDate() + days);
@@ -26,7 +25,7 @@ async function manageReminders() {
     { type: QueryTypes.SELECT }
   );
 
-  reminders.forEach(async (row) => {
+  for (const row of reminders) {
     try {
       const channel = await client.channels.fetch(row.channel);
       await channel.send(row.message);
@@ -43,7 +42,7 @@ async function manageReminders() {
        SET nextexecution="${next_date.toISOString()}"
        WHERE id=${row.id}`
     );
-  });
+  }
 }
 
 module.exports = {

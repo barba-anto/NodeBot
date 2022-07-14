@@ -6,7 +6,7 @@ module.exports = {
   once: true,
   execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
-    manageReminders()
-    setInterval(manageReminders, 30*1000)
+    // manageReminders()
+    // setInterval(manageReminders, 30*1000)
   },
 };

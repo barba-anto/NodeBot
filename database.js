@@ -15,9 +15,18 @@ const Reminders = sequelize.define("reminders", {
   nextexecution: { type: DataTypes.STRING, defaultValue: "" },
 });
 
-Reminders.sync()
+const Channels = sequelize.define("channels", {
+  guild: DataTypes.STRING,
+  channelType: DataTypes.STRING,
+  channel: DataTypes.STRING,
+  message: DataTypes.STRING
+})
+
+
+Promise.all([Reminders.sync(), Channels.sync()])
 
 module.exports = {
   sequelize,
   Reminders,
+  Channels
 };
