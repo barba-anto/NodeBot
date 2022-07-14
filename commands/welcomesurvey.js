@@ -12,6 +12,7 @@ const {Channels} = require("../database");
 client.on('interactionCreate', async interaction => {
     if (!interaction.isModalSubmit()) return
     if (interaction.customId === 'member-application-survey') {
+        interaction.deferReply()
         const inGameName = interaction.fields.getTextInputValue('inGameName');
         const fromServer = interaction.fields.getTextInputValue('fromServer');
         const profession = interaction.fields.getTextInputValue('profession');
@@ -35,12 +36,12 @@ client.on('interactionCreate', async interaction => {
             channel.send({
                 embeds: [embed]
             })
-            return interaction.reply({
+            return interaction.editReply({
                 content: 'Your submission was recieved successfully!',
                 ephemeral: true
             });
         }
-        return interaction.reply({
+        return interaction.editReply({
             content: 'Whoops, something went wrong :( Please contact a mod',
             ephemeral: true
         })
@@ -85,6 +86,6 @@ module.exports = {
         // Add inputs to the modal
         modal.addComponents(firstRow, secondRow, thirdRow, fourthRow);
         // Show the modal to the user
-        await interaction.showModal(modal);
+        return interaction.showModal(modal);
     },
 };

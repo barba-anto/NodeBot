@@ -15,12 +15,13 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    interaction.deferReply()
     const insult = await axios(
       "https://insult.mattbas.org/api/insult.json"
     ).then((res) =>
       res.data ? res.data.insult : "is lucky... Something went wrong with request :("
     );
 
-    return interaction.reply(`<@${interaction.options.getUser('user').id}> ${insult}`);
+    return interaction.editReply(`<@${interaction.options.getUser('user').id}> ${insult}`);
   },
 };
