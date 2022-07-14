@@ -11,7 +11,7 @@ const {Channels} = require("../database");
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isModalSubmit()) return
-    await interaction.deferReply()
+    await interaction.deferReply({ ephemeral: true })
     if (interaction.customId === 'member-application-survey') {
         const inGameName = interaction.fields.getTextInputValue('inGameName');
         const fromServer = interaction.fields.getTextInputValue('fromServer');
