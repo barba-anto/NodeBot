@@ -17,14 +17,14 @@ for (const file of commandFiles) {
 const rest = new REST({ version: '9' }).setToken(token);
 
 // ADD GUILD COMMANDS
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(() => console.log('Successfully registered application commands.'))
-	.catch(console.error);
+// rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+// 	.then(() => console.log('Successfully registered application commands.'))
+// 	.catch(console.error);
 
 // ADD GLOBAL COMMANDS
-// rest.put(Routes.applicationCommands(clientId), { body: commands })
-// 	.then(() => console.log('Successfully registered global commands.'))
-// 	.catch(console.error);
+rest.put(Routes.applicationCommands(clientId), { body: commands })
+	.then(() => console.log('Successfully registered global commands.'))
+	.catch(console.error);
 
 // DELETE GUILD COMMANDS
 // rest.get(Routes.applicationGuildCommands(clientId, guildId))

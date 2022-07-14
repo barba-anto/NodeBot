@@ -35,11 +35,15 @@ client.on('interactionCreate', async interaction => {
             channel.send({
                 embeds: [embed]
             })
-            await interaction.reply({
+            return interaction.reply({
                 content: 'Your submission was recieved successfully!',
                 ephemeral: true
             });
         }
+        return interaction.reply({
+            content: 'Whoops, something went wrong :( Please contact a mod',
+            ephemeral: true
+        })
     }
 })
 
