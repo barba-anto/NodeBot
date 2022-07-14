@@ -50,7 +50,7 @@ client.on('interactionCreate', async interaction => {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("member-application")
-        .setDescription("Replies with a modal"),
+        .setDescription("Start the application survey for the server"),
 
     async execute(interaction) {
         const modal = new Modal()
