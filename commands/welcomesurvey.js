@@ -11,8 +11,8 @@ const {Channels} = require("../database");
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isModalSubmit()) return
+    await interaction.deferReply()
     if (interaction.customId === 'member-application-survey') {
-        interaction.deferReply()
         const inGameName = interaction.fields.getTextInputValue('inGameName');
         const fromServer = interaction.fields.getTextInputValue('fromServer');
         const profession = interaction.fields.getTextInputValue('profession');
@@ -36,16 +36,20 @@ client.on('interactionCreate', async interaction => {
             channel.send({
                 embeds: [embed]
             })
-            return interaction.editReply({
+            return await interaction.editReply({
                 content: 'Your submission was recieved successfully!',
                 ephemeral: true
             });
         }
-        return interaction.editReply({
+        return await interaction.editReply({
             content: 'Whoops, something went wrong :( Please contact a mod',
             ephemeral: true
         })
     }
+    await interaction.editReply({
+        content: 'Unknown modal',
+        ephemeral: true
+    })
 })
 
 module.exports = {

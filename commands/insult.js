@@ -15,7 +15,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    interaction.deferReply()
+    await interaction.deferReply()
     const insult = await axios(
       "https://insult.mattbas.org/api/insult.json"
     ).then((res) =>

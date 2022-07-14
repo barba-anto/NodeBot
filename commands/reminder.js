@@ -128,7 +128,7 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        interaction.deferReply()
+        await interaction.deferReply()
         const validateTime = (time) => {
             const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
             return time.match(timeReg);

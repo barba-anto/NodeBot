@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("Have a laugh and don't complain"),
 
   async execute(interaction) {
-    interaction.deferReply()
+    await interaction.deferReply()
     const joke = await axios(
       "https://v2.jokeapi.dev/joke/Miscellaneous,Dark,Pun,Spooky,Christmas?blacklistFlags=religious,racist,sexist&format=txt"
     ).then((res) => (res.data ? res.data : "Oops... Something went wrong :("));

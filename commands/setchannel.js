@@ -28,7 +28,7 @@ module.exports = {
     ,
 
     async execute(interaction) {
-        interaction.deferReply()
+        await interaction.deferReply()
         if (interaction.options.getSubcommand() === WELCOME) {
             const res = await Channels.findOne({
                 where: {
