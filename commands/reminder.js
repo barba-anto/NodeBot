@@ -128,6 +128,7 @@ module.exports = {
         ),
 
     async execute(interaction) {
+        interaction.deferReply()
         const validateTime = (time) => {
             const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
             return time.match(timeReg);
@@ -142,7 +143,7 @@ module.exports = {
             const time = interaction.options.getString("hhmm");
 
             if (!validateTime(time))
-                interaction.reply({
+                interaction.editReply({
                     content: `Time format is not valid! It must be in HH:MM format.`,
                     ephemeral: true,
                 });
@@ -166,7 +167,7 @@ module.exports = {
                 });
 
             if (res)
-                interaction.reply({
+                interaction.editReply({
                     content: `Reminder #${res.id} created successfully`,
                     ephemeral: true,
                 });
@@ -195,11 +196,11 @@ module.exports = {
             });
 
             if (embeds.length)
-                interaction.reply({
+                interaction.editReply({
                     embeds: embeds,
                     ephemeral: true,
                 });
-            else interaction.reply("No reminders for this channel");
+            else interaction.editReply("No reminders for this channel");
         } else if (subcommandGroup === "delete") {
             const messageId = interaction.options.getInteger("id");
             res = await Reminders.destroy({
@@ -211,12 +212,12 @@ module.exports = {
                 },
             });
             if (res)
-                interaction.reply({
+                interaction.editReply({
                     content: `Reminder #${messageId} deleted successfully`,
                     ephemeral: true,
                 });
             else
-                interaction.reply({
+                interaction.editReply({
                     content: `Reminder #${messageId} not found!`,
                     ephemeral: true,
                 });

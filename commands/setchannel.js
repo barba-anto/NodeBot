@@ -28,6 +28,7 @@ module.exports = {
     ,
 
     async execute(interaction) {
+        interaction.deferReply()
         if (interaction.options.getSubcommand() === WELCOME) {
             const res = await Channels.findOne({
                 where: {
@@ -47,7 +48,7 @@ module.exports = {
                     channel: interaction.channel.id,
                     message: interaction.options.getString("message"),
                 })
-            return interaction.reply({
+            return interaction.editReply({
                 content: "Welcome channel configured!",
                 ephemeral: true
             });
@@ -68,7 +69,7 @@ module.exports = {
                     channelType: APPLICATIONS,
                     channel: interaction.channel.id,
                 })
-            return interaction.reply({
+            return interaction.editReply({
                 content: "Applications result channel configured!",
                 ephemeral: true
             });
