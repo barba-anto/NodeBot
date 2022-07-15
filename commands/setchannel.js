@@ -22,7 +22,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("set-channel")
         .setDescription("Uses this channel for welcome messages")
-        // .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         // .addSubcommand(command =>
         //     command
         //         .setName(WELCOME)
