@@ -11,6 +11,7 @@ client.on('interactionCreate', async interaction => {
     await interaction.deferReply({ephemeral: true})
     if (interaction.customId.split('@')[0] === ButtonTypes.NUKE_CHANNEL) {
         const position = interaction.channel.position
+        const channelId = interaction.channel.id
         interaction.channel.clone()
             .then(async channel => {
                 await channel.setPosition(position)
@@ -19,12 +20,12 @@ client.on('interactionCreate', async interaction => {
                 sequelize.query(
                     `UPDATE Reminders
                      SET channel="${channel.id}"
-                     WHERE channel = "${interaction.channel.id}" `
+                     WHERE channel = "${channelId.id}" `
                 );
                 sequelize.query(
                     `UPDATE Channels
                      SET channel="${channel.id}"
-                     WHERE channel = "${interaction.channel.id}" `
+                     WHERE channel = "${channelId.id}" `
                 )
             })
         interaction.channel.delete()
