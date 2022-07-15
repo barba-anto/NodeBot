@@ -8,8 +8,8 @@ const {MessageActionRow, MessageButton} = require("discord.js");
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isButton()) return;
-    await interaction.deferReply({ephemeral: true})
     if (interaction.customId.split('@')[0] === ButtonTypes.NUKE_CHANNEL) {
+        await interaction.deferReply({ephemeral: true})
         const position = interaction.channel.position
         const channelId = interaction.channel.id
         interaction.channel.clone()

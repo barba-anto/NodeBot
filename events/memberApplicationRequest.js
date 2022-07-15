@@ -5,8 +5,8 @@ module.exports = {
     name: "interactionCreate",
     async execute(interaction) {
         if (!interaction.isModalSubmit()) return
-        await interaction.deferReply({ephemeral: true})
         if (interaction.customId.split('@')[0] === ChannelTypes.APPLICATIONS_REQUEST) {
+            await interaction.deferReply({ephemeral: true})
             const inGameName = interaction.fields.getTextInputValue('inGameName');
             const fromServer = interaction.fields.getTextInputValue('fromServer');
             const profession = interaction.fields.getTextInputValue('profession');
