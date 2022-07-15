@@ -10,9 +10,10 @@ client.on('interactionCreate', async interaction => {
     if (!interaction.isButton()) return;
     await interaction.deferReply({ephemeral: true})
     if (interaction.customId.split('@')[0] === ButtonTypes.NUKE_CHANNEL) {
+        const position = interaction.channel.position
         interaction.channel.clone()
             .then(async channel => {
-                await channel.setPosition(interaction.channel.position)
+                await channel.setPosition(position)
                 await channel.send(`☣⚠️ Big boom happened in the room ⚠️☣`);
                 await channel.send(`https://c.tenor.com/6Ga4eX7MnUQAAAAC/putin-nuclear.gif`);
                 sequelize.query(
