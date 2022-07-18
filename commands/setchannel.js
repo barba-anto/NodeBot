@@ -140,6 +140,11 @@ module.exports = {
                             role: role.id,
                         })
                 }
+                else await AutoremovedRoles.destroy({
+                        where: {
+                            guild: interaction.guild.id
+                        }
+                    })
 
 
                 interaction.editReply({
