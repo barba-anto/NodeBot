@@ -18,10 +18,10 @@ async function manageReminders() {
   const reminders = await sequelize.query(
     `SELECT * FROM Reminders 
       WHERE (type="${DAILY}" AND time<="${currentTime}" 
-        AND nextexecution<="${now.toISOString()}") 
+        AND (nextexecution<="${now.toISOString()}" OR nextexecution IS NULL)) 
       OR (type="${WEEKLY}" AND dayofweek=${currentDay} 
         AND time<="${currentTime}" 
-        AND nextexecution<="${now.toISOString()}")`,
+        AND (nextexecution<="${now.toISOString()}" OR nextexecution IS NULL))`,
     { type: QueryTypes.SELECT }
   );
 
