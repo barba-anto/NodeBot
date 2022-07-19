@@ -33,7 +33,7 @@ module.exports = {
           .addField("Profession", profession, true)
           .addField("Extra notes", notes, true)
           .setTimestamp()
-            .setColor("#0055aa");
+          .setColor("#0055aa");
         const removeRole = await AutoremovedRoles.findOne({
           where: {
             guild: interaction.guild.id,
