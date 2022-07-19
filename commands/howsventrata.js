@@ -28,8 +28,8 @@ module.exports = {
       .setTitle(
         `**${
           interaction.options.getUser("user")
-            ? interaction.options.getUser("user").username
-            : interaction.user.username
+            ? interaction.options.getUser("user")
+            : interaction.user
         }'s smile is like**`
       )
       .setDescription(bold(eRand[0] + mRand + eRand[1]))

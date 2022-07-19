@@ -17,8 +17,8 @@ module.exports = {
       .setTitle(
         `**${
           interaction.options.getUser("user")
-            ? interaction.options.getUser("user").username
-            : interaction.user.username
+            ? interaction.options.getUser("user")
+            : interaction.user
         }'s peepee is**`
       )
       .setDescription(`**c${"=".repeat(rNum)}3**`)

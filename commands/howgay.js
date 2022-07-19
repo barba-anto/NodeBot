@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, bold } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
@@ -28,13 +28,15 @@ module.exports = {
       .setTitle(
         `**${
           interaction.options.getUser("user")
-            ? interaction.options.getUser("user").username
-            : interaction.user.username
+            ? interaction.options.getUser("user")
+            : interaction.user
         } is ${rNum}% gay**`
       )
       .setDescription(description)
       .setColor(`#ffffff`)
-      .setThumbnail(`https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Gay_Pride_Flag.svg/1920px-Gay_Pride_Flag.svg.png`);
+      .setThumbnail(
+        `https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Gay_Pride_Flag.svg/1920px-Gay_Pride_Flag.svg.png`
+      );
 
     return interaction.reply({ embeds: [embed] });
   },

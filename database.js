@@ -19,20 +19,19 @@ const Channels = sequelize.define("channels", {
   guild: DataTypes.STRING,
   channelType: DataTypes.STRING,
   channel: DataTypes.STRING,
-  message: DataTypes.STRING
-})
+  message: DataTypes.STRING,
+});
 
 const AutoremovedRoles = sequelize.define("autoremovedroles", {
   guild: DataTypes.STRING,
-  role: DataTypes.STRING
-})
+  role: DataTypes.STRING,
+});
 
-
-Promise.all([Reminders.sync(), Channels.sync(), AutoremovedRoles.sync()])
+Promise.all([Reminders.sync(), Channels.sync(), AutoremovedRoles.sync()]);
 
 module.exports = {
   sequelize,
   Reminders,
   Channels,
-  AutoremovedRoles
+  AutoremovedRoles,
 };

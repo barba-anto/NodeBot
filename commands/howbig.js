@@ -24,8 +24,8 @@ module.exports = {
       .setTitle(
         `**${
           interaction.options.getUser("user")
-            ? interaction.options.getUser("user").username
-            : interaction.user.username
+            ? interaction.options.getUser("user")
+            : interaction.user
         }'s boobs are like this**`
       )
       .setDescription(bold(boobs))

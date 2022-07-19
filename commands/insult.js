@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const axios = require('axios')
+const axios = require("axios");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,13 +15,17 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    await interaction.deferReply()
+    await interaction.deferReply();
     const insult = await axios(
       "https://insult.mattbas.org/api/insult.json"
     ).then((res) =>
-      res.data ? res.data.insult : "is lucky... Something went wrong with request :("
+      res.data
+        ? res.data.insult
+        : "is lucky... Something went wrong with request :("
     );
 
-    return interaction.editReply(`<@${interaction.options.getUser('user').id}> ${insult}`);
+    return interaction.editReply(
+      `${interaction.options.getUser("user")} ${insult}`
+    );
   },
 };
