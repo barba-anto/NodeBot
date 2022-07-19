@@ -121,7 +121,7 @@ module.exports = {
           });
 
         const role = interaction.options.getRole("remove-role");
-        if (role.id) {
+        if (role) {
           const existingRole = await AutoremovedRoles.findOne({
             where: {
               guild: interaction.guild.id,

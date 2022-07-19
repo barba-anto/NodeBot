@@ -25,22 +25,29 @@ module.exports = {
           applicationsChannel.channel
         );
         const embed = new MessageEmbed()
-          .setTitle(`Application of ${interaction.user}`)
+          .setTitle(`Application of ${interaction.user.tag}`)
+          .setDescription(`${interaction.user}`)
           .setThumbnail(interaction.user.avatarURL())
           .addField("Top War name", inGameName, true)
           .addField("From server", fromServer, true)
           .addField("Profession", profession, true)
           .addField("Extra notes", notes, true)
-          .setTimestamp();
+          .setTimestamp()
+            .setColor("#0055aa");
         const removeRole = await AutoremovedRoles.findOne({
           where: {
             guild: interaction.guild.id,
           },
         });
         if (removeRole) interaction.member.roles.remove(removeRole.role);
-        channel.send({
-          embeds: [embed],
-        });
+        channel
+          .send({
+            embeds: [embed],
+            fetchReply: true,
+          })
+          .then((message) => {
+            message.react("👍").then(() => message.react("👎"));
+          });
         return await interaction.editReply({
           content: "Your submission was recieved successfully!",
           ephemeral: true,

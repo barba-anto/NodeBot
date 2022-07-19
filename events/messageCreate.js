@@ -21,10 +21,11 @@ module.exports = {
         "If you want to support him donate to his PayPal:\n" +
           "https://www.paypal.com/donate/?hosted_button_id=XJYCTJ7RLCAEE"
       )
-      .setFooter(
-        "Any issues or suggestion for the bot?"+
-        "Contact @BarbaH#2895 and tell him that he's incapable"
-      );
+      .setFooter({
+        text:
+          "Any issues or suggestion for the bot?" +
+          "Contact @BarbaH#2895 and tell him that he's incapable",
+      });
     if (message.mentions.has(message.client.user.id)) {
       message.reply({
         content: `Hey ${message.author}! I'm a bot born from BarbaH's brain.`,
