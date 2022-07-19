@@ -3,6 +3,7 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "database.sqlite",
+  logging: process.env.NODE_ENV === "dev" ? console.log : false,
 });
 
 const Reminders = sequelize.define("reminders", {
