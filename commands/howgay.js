@@ -10,6 +10,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    await interaction.deferReply()
     // gets a random int between 1 - 100
     const rNum = Math.floor(Math.random() * 100);
 
@@ -27,9 +28,9 @@ module.exports = {
     const embed = new MessageEmbed()
       .setTitle(
         `**${
-          interaction.options.getUser("user")
-            ? interaction.options.getUser("user")
-            : interaction.user
+          (interaction.options.getUser("user")
+            ? await interaction.guild.members.fetch(interaction.options.getUser("user"))
+            : interaction.member).displayName
         } is ${rNum}% gay**`
       )
       .setDescription(description)
@@ -38,6 +39,6 @@ module.exports = {
         `https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Gay_Pride_Flag.svg/1920px-Gay_Pride_Flag.svg.png`
       );
 
-    return interaction.reply({ embeds: [embed] });
+    return interaction.editReply({ embeds: [embed] });
   },
 };

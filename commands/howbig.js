@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, bold } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, CommandInteraction} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,6 +10,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    await interaction.deferReply()
     const extermities = [`（）`, `()`];
     const middle = [`ㅅ`, `)(`, `Y`];
     const nips = [`。`, `⊙`, `.`, `v`, `•`, `*`, `O`, `o`, `°`];
@@ -23,14 +24,14 @@ module.exports = {
     const embed = new MessageEmbed()
       .setTitle(
         `**${
-          interaction.options.getUser("user")
-            ? interaction.options.getUser("user")
-            : interaction.user
+          (interaction.options.getUser("user")
+            ? await interaction.guild.members.fetch(interaction.options.getUser("user"))
+            : interaction.member).displayName
         }'s boobs are like this**`
       )
       .setDescription(bold(boobs))
       .setColor(`#ffffff`);
 
-    return interaction.reply({ embeds: [embed] });
+    return interaction.editReply({ embeds: [embed] });
   },
 };

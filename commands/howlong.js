@@ -10,20 +10,21 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    await interaction.deferReply()
     // gets a random int between 1 - 20
     const rNum = Math.round(Math.random() * 20);
 
     const embed = new MessageEmbed()
       .setTitle(
         `**${
-          interaction.options.getUser("user")
-            ? interaction.options.getUser("user")
-            : interaction.user
+          (interaction.options.getUser("user")
+            ? await interaction.guild.members.fetch(interaction.options.getUser("user"))
+            : interaction.member).displayName
         }'s peepee is**`
       )
       .setDescription(`**c${"=".repeat(rNum)}3**`)
       .setColor(`#00ffff`);
 
-    return interaction.reply({ embeds: [embed] });
+    return interaction.editReply({ embeds: [embed] });
   },
 };

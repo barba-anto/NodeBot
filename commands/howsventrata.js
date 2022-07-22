@@ -10,6 +10,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    await interaction.deferReply()
     // gets a random int between 1 - 10
     const rNum = Math.round(Math.random() * 20);
 
@@ -27,14 +28,14 @@ module.exports = {
     const embed = new MessageEmbed()
       .setTitle(
         `**${
-          interaction.options.getUser("user")
-            ? interaction.options.getUser("user")
-            : interaction.user
+          (interaction.options.getUser("user")
+            ? await interaction.guild.members.fetch(interaction.options.getUser("user"))
+            : interaction.member).displayName
         }'s smile is like**`
       )
       .setDescription(bold(eRand[0] + mRand + eRand[1]))
       .setColor(`#ffffff`);
 
-    return interaction.reply({ embeds: [embed] });
+    return interaction.editReply({ embeds: [embed] });
   },
 };
