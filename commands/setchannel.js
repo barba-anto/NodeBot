@@ -39,6 +39,12 @@ module.exports = {
         .setDescription(
           "Set channel as the member applications request channel"
         )
+        .addStringOption((option) =>
+          option
+            .setName("text")
+            .setDescription("Text to be shown over the button")
+            .setRequired(true)
+        )
         .addRoleOption((option) =>
           option
             .setName("remove-role")
@@ -157,7 +163,7 @@ module.exports = {
             .setStyle("PRIMARY")
         );
         interaction.channel.send({
-          content: "Press the button to start the application",
+          content: interaction.options.getString("text"),
           components: [row],
         });
         break;

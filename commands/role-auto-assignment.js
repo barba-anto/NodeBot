@@ -10,7 +10,7 @@ const { client } = require("../client");
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isSelectMenu()) return;
 
-  if (interaction.customId.split("@")[0] === "autorole") {
+  if (interaction.customId.split("@")[0] === "role-auto-assignment") {
     await interaction.deferUpdate({ ephemeral: true });
     await interaction.member.roles.add(interaction.values);
     await interaction.followUp({
@@ -24,9 +24,15 @@ client.on("interactionCreate", async (interaction) => {
 const MAX_OPTIONS = 20;
 
 const command = new SlashCommandBuilder()
-  .setName("autorole")
+  .setName("role-auto-assignment")
   .setDescription("Let people choose his own roles")
-  .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels);
+  .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+  .addStringOption((option) =>
+    option
+      .setName("text")
+      .setDescription("Text to be shown over the selection box")
+      .setRequired(true)
+  );
 
 for (let i = 1; i <= MAX_OPTIONS; i++)
   command.addRoleOption((option) =>
@@ -53,7 +59,7 @@ module.exports = {
 
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
-        .setCustomId(`autorole@`)
+        .setCustomId(`role-auto-assignment@`)
         .setPlaceholder("Nothing selected")
         .setMinValues(0)
         .setMaxValues(options.length)
@@ -61,7 +67,7 @@ module.exports = {
     );
 
     const embed = new MessageEmbed()
-      .setTitle("Select the roles you want")
+      .setTitle(interaction.options.getString("text"))
       .setDescription(
         "The roles will be assigned to you, to remove them you have to do it from your profile"
       );
