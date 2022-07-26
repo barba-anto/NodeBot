@@ -19,7 +19,7 @@ module.exports = {
       .addField(
         "Support my master :heart:",
         "If you want to support him donate to his PayPal:\n" +
-          "https://www.paypal.com/donate/?hosted_button_id=XJYCTJ7RLCAEE"
+          "https://www.paypal.com/paypalme/barbaanto"
       )
       .setFooter({
         text:
