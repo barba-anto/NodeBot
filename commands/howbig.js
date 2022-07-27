@@ -1,5 +1,4 @@
-const { SlashCommandBuilder, bold } = require("@discordjs/builders");
-const { MessageEmbed, CommandInteraction} = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder, bold } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,7 +20,7 @@ module.exports = {
 
     const boobs = eRand[0] + nRand + mRand + nRand + eRand[1];
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(
         `**${
           (interaction.options.getUser("user")

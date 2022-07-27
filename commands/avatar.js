@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,7 +11,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const user = interaction.options.getUser("target");
-    const embeds = new MessageEmbed().setImage(
+    const embeds = new EmbedBuilder().setImage(
       user
         ? user.displayAvatarURL({ dynamic: true, size: 2048 })
         : interaction.user.displayAvatarURL({ dynamic: true, size: 2048 })
