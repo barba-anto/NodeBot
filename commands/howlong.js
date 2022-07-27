@@ -1,5 +1,4 @@
-const { SlashCommandBuilder, bold } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,7 +13,7 @@ module.exports = {
     // gets a random int between 1 - 20
     const rNum = Math.round(Math.random() * 20);
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(
         `**${
           (interaction.options.getUser("user")

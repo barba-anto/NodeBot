@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
-  MessageActionRow,
-  MessageSelectMenu,
-  MessageEmbed,
+  ActionRowBuilder,
+  SelectMenuBuilder,
+  SlashCommandBuilder,
+  EmbedBuilder,
 } = require("discord.js");
 const { PermissionFlagsBits } = require("discord-api-types/v10");
 const { client } = require("../client");
@@ -57,8 +57,8 @@ module.exports = {
       }
     }
 
-    const row = new MessageActionRow().addComponents(
-      new MessageSelectMenu()
+    const row = new ActionRowBuilder().addComponents(
+      new SelectMenuBuilder()
         .setCustomId(`role-auto-assignment@`)
         .setPlaceholder("Nothing selected")
         .setMinValues(0)
@@ -66,7 +66,7 @@ module.exports = {
         .addOptions(options)
     );
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(interaction.options.getString("text"))
       .setDescription(
         "The roles will be assigned to you, to remove them you have to do it from your profile"

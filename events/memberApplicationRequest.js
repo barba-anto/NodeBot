@@ -1,10 +1,11 @@
 const { ChannelTypes } = require("../common/enums");
 const { Channels, AutoremovedRoles } = require("../database");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
+const { InteractionType } = require("discord-api-types/v10");
 module.exports = {
   name: "interactionCreate",
   async execute(interaction) {
-    if (!interaction.isModalSubmit()) return;
+    if (!(interaction.type === InteractionType.ModalSubmit)) return;
     if (
       interaction.customId.split("@")[0] === ChannelTypes.APPLICATIONS_REQUEST
     ) {
@@ -24,14 +25,20 @@ module.exports = {
         const channel = await interaction.guild.channels.fetch(
           applicationsChannel.channel
         );
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setTitle(`Application of ${interaction.user.tag}`)
           .setDescription(`${interaction.user}`)
           .setThumbnail(interaction.user.avatarURL())
-          .addField("Top War name", inGameName, true)
-          .addField("From server", fromServer, true)
-          .addField("Profession", profession, true)
-          .addField("Extra notes", notes, true)
+          .addFields(
+            {
+              name: "Top War name",
+              value: inGameName,
+              inline: true,
+            },
+            { name: "From server", value: fromServer, inline: true },
+            { name: "Profession", value: profession, inline: true },
+            { name: "Extra notes", value: notes, inline: true }
+          )
           .setTimestamp()
           .setColor("#0055aa");
         const removeRole = await AutoremovedRoles.findOne({
@@ -58,9 +65,5 @@ module.exports = {
         ephemeral: true,
       });
     }
-    await interaction.editReply({
-      content: "Unknown modal",
-      ephemeral: true,
-    });
   },
 };

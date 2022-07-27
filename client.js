@@ -1,10 +1,10 @@
-const { Collection, Client, Intents } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_PRESENCES,
-    Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_MESSAGES,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
   ],
 });
 

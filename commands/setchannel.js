@@ -1,8 +1,7 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { PermissionFlagsBits } = require("discord-api-types/v10");
+const { PermissionFlagsBits, ButtonStyle} = require("discord-api-types/v10");
 const { Channels, AutoremovedRoles } = require("../database");
 const { ChannelTypes, ButtonTypes } = require("../common/enums");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, SlashCommandBuilder} = require("discord.js");
 const { client } = require("../client");
 const { sendSurveyModal } = require("../common/functions");
 
@@ -154,13 +153,13 @@ module.exports = {
           ephemeral: true,
         });
 
-        const row = new MessageActionRow().addComponents(
-          new MessageButton()
+        const row = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
             .setCustomId(
               `${ButtonTypes.APPLICATIONS_REQUEST}@${interaction.channel.id}`
             )
             .setLabel("START SURVEY")
-            .setStyle("PRIMARY")
+            .setStyle(ButtonStyle.Primary)
         );
         interaction.channel.send({
           content: interaction.options.getString("text"),

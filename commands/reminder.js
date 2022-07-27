@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const { PermissionFlagsBits } = require("discord-api-types/v10");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 const { Reminders } = require("../database");
 
@@ -189,7 +188,7 @@ module.exports = {
         fields.push({ name: "Time", value: reminder.time });
         fields.push({ name: "Message", value: reminder.message });
 
-        return new MessageEmbed()
+        return new EmbedBuilder()
           .setColor("#ffffff")
           .setTitle(`#${reminder.id}`)
           .addFields(...fields);

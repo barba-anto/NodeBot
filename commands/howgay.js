@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,7 +24,7 @@ module.exports = {
     else if (rNum <= 100) description = "Is that you, Enzo?";
     else description = `This is gay. Like REALLY gay. Kulo's level of gay`;
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(
         `**${
           (interaction.options.getUser("user")

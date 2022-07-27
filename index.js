@@ -19,7 +19,7 @@ for (const file of commandFiles) {
 
 // intercept commands requests
 client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isCommand()) return;
+  if (!interaction.isChatInputCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
 

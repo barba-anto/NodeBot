@@ -1,10 +1,12 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { PermissionFlagsBits } = require("discord-api-types/v10");
+const { PermissionFlagsBits, ButtonStyle } = require("discord-api-types/v10");
 const { sequelize } = require("../database");
 const { client } = require("../client");
-const { ChannelTypes, ButtonTypes } = require("../common/enums");
-const { sendSurveyModal } = require("../common/functions");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ButtonTypes } = require("../common/enums");
+const {
+  ActionRowBuilder,
+  ButtonBuilder,
+  SlashCommandBuilder,
+} = require("discord.js");
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
@@ -20,20 +22,20 @@ client.on("interactionCreate", async (interaction) => {
       );
       sequelize.query(
         `UPDATE Reminders
-                     SET channel="${channel.id}"
-                     WHERE channel = "${channelId.id}" `
+                 SET channel="${channel.id}"
+                 WHERE channel = "${channelId.id}" `
       );
       sequelize.query(
         `UPDATE Channels
-                     SET channel="${channel.id}"
-                     WHERE channel = "${channelId.id}" `
+                 SET channel="${channel.id}"
+                 WHERE channel = "${channelId.id}" `
       );
     });
     interaction.channel.delete();
   } else if (
     interaction.customId.split("@")[0] === ButtonTypes.ABORT_NUKE_CHANNEL
   )
-    interaction.editReply({
+    interaction.reply({
       content: "Nuke canceled",
       ephemeral: true,
     });
@@ -47,20 +49,20 @@ module.exports = {
     .setDMPermission(false),
 
   async execute(interaction) {
-    const row = new MessageActionRow()
+    const row = new ActionRowBuilder()
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId(`${ButtonTypes.NUKE_CHANNEL}@${interaction.channel.id}`)
           .setLabel("YES")
-          .setStyle("SUCCESS")
+          .setStyle(ButtonStyle.Success)
       )
       .addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId(
             `${ButtonTypes.ABORT_NUKE_CHANNEL}@${interaction.channel.id}`
           )
           .setLabel("NO")
-          .setStyle("DANGER")
+          .setStyle(ButtonStyle.Danger)
       );
     interaction.reply({
       content: "Do you really want to nuke the channel?",

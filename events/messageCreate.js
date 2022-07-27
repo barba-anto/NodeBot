@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "messageCreate",
@@ -10,16 +10,16 @@ module.exports = {
       message.type === "REPLY"
     )
       return false;
-    const embeds = new MessageEmbed()
+    const embeds = new EmbedBuilder()
       .setTitle("About the author")
       .setColor("#339966")
       .setDescription(
         "My master is just a simple retarded that does this for fun"
       )
-      .addField(
-        "Support my master :heart:",
+      .addFields(
+        ["Support my master :heart:",
         "If you want to support him donate to his PayPal:\n" +
-          "https://www.paypal.com/paypalme/barbaanto"
+          "https://www.paypal.com/paypalme/barbaanto"]
       )
       .setFooter({
         text:
